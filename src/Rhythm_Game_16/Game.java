@@ -38,7 +38,9 @@ public class Game extends Thread{	// Thread는 하나의 프로그램 안에서 
 	private String difficulty;	// 난이도
 	private String musicTitle;
 	private Music gameMusic;
-	
+	private int point = 0;
+	private String spoint = point + "";
+			
 	ArrayList<Note> noteList = new ArrayList<Note>();
 	
 	public Game(String titleName, String difficulty, String musicTitle) {
@@ -96,7 +98,8 @@ public class Game extends Thread{	// Thread는 하나의 프로그램 안에서 
 		g.drawString("L", 993, 609);
 		g.setColor(Color.LIGHT_GRAY);
 		g.setFont(new Font("Elephant", Font.BOLD, 30)); // Elephant폰트 사용
-		g.drawString("000000", 565, 702); // 점수출력
+		g.drawString(spoint, 565, 702);
+		System.out.println(spoint);
 		g.drawImage(blueFlareImage, 450, 400, null);
 		g.drawImage(judgeImage, 470, 420, null);
 		g.drawImage(keyPadSImage, 228, 580, null);
@@ -393,10 +396,12 @@ public class Game extends Thread{	// Thread는 하나의 프로그램 안에서 
 			Note note = noteList.get(i);
 			if(input.equals(note.getNotetype())) {  // 현재 노트가 해당 키라면
 				judgeEvent(note.judge()); //판정을 수행한다
+				judgeEvent2(note.judge());
 				break; // 노트를 찾자마자 break;
 			} // 해당하는 노트가 없으면 그냥 무시
 		}
 	}
+	
 	
 	public void judgeEvent(String judge) {
 		if(!judge.equals("None")) {
@@ -421,4 +426,30 @@ public class Game extends Thread{	// Thread는 하나의 프로그램 안에서 
 			judgeImage = new ImageIcon(Main.class.getResource("..//images//early.png")).getImage();
 		}
 	}
+	// enum을 조건문에 활용하면 더 좋은 코드가 된다.
+	
+	public void judgeEvent2(String judge) {
+		
+		switch (judge) {
+			case "Miss": 
+				point += 1;// 점수출력
+				break;
+			case "Late": 
+				point += 2;
+				break;
+			case "Good": 
+				point += 3;
+				break;
+			case "Great": 
+				point += 4;
+				break;
+			case "Perfect": 
+				point += 5;
+				break;
+			case "Early": 
+				point += 1;
+				break;
+		}
+		spoint = point + "";
+	}		
 }
