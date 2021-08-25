@@ -99,7 +99,7 @@ public class Game extends Thread{	// Thread는 하나의 프로그램 안에서 
 		g.setColor(Color.LIGHT_GRAY);
 		g.setFont(new Font("Elephant", Font.BOLD, 30)); // Elephant폰트 사용
 		g.drawString(spoint, 565, 702);
-		System.out.println(spoint);
+		//System.out.println(spoint);
 		g.drawImage(blueFlareImage, 450, 400, null);
 		g.drawImage(judgeImage, 470, 420, null);
 		g.drawImage(keyPadSImage, 228, 580, null);
@@ -343,7 +343,8 @@ public class Game extends Thread{	// Thread는 하나의 프로그램 안에서 
 					new Beat(startTime + gap * 284, "J"),
 					new Beat(startTime + gap * 284, "K"),
 					new Beat(startTime + gap * 287, "Space"),
-								
+					
+																		
 			};
 		}
 		else if(titleName.equals("always_with_me_ocarina_ver") && difficulty.equals("Easy")) {
@@ -385,7 +386,8 @@ public class Game extends Thread{	// Thread는 하나의 프로그램 안에서 
 				try {
 					Thread.sleep(5);
 				} catch (Exception e) {
-					e.printStackTrace();
+					//e.printStackTrace(); 
+					Thread.currentThread().interrupt();
 				}
 			}
 		}
